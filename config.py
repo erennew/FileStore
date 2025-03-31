@@ -10,7 +10,7 @@ APP_ID = int(os.environ.get("APP_ID", "24500584"))
 # Your API Hash from my.telegram.org
 API_HASH = os.environ.get("API_HASH", "449da69cf4081dc2cc74eea828d0c490")
 # Your db channel Id
-CHANNEL_ID = int(os.environ.get("CHANNEL_ID", "-1001333766434"))
+CHANNEL_ID = int(os.environ.get("CHANNEL_ID", "-1002659351510"))
 # NAMA OWNER
 OWNER = os.environ.get("OWNER", "roxcy")
 # OWNER ID
@@ -25,7 +25,7 @@ DB_NAME = os.environ.get("DATABASE_NAME", "Cluster0")
 TIME = int(os.environ.get("TIME", "30"))
 
 # Force subscription channel IDs (0 to disable)
-FORCE_SUB_CHANNEL1 = int(os.environ.get("FORCE_SUB_CHANNEL1", "-1002331321194"))
+FORCE_SUB_CHANNEL1 = int(os.environ.get("FORCE_SUB_CHANNEL1", "-1002650862527"))
 FORCE_SUB_CHANNEL2 = int(os.environ.get("FORCE_SUB_CHANNEL2", "0"))
 FORCE_SUB_CHANNEL3 = int(os.environ.get("FORCE_SUB_CHANNEL3", "0"))
 FORCE_SUB_CHANNEL4 = int(os.environ.get("FORCE_SUB_CHANNEL4", "0"))
