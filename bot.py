@@ -108,7 +108,7 @@ class Bot(Client):
 
         self.set_parse_mode(ParseMode.HTML)
         self.username = usr_bot_me.username
-        self.LOGGER(__name__).info(f"Bot Running..! Made by @Codeflix_Bots")   
+        self.LOGGER(__name__).info(f"Bot Running..! Made by @Cultuedteluguweeb")   
 
         # Start Web Server
         app = web.AppRunner(await web_server())
@@ -116,7 +116,7 @@ class Bot(Client):
         await web.TCPSite(app, "0.0.0.0", PORT).start()
 
 
-        try: await self.send_message(OWNER_ID, text = f"<b><blockquote>🤖 Bᴏᴛ Rᴇsᴛᴀʀᴛᴇᴅ by @Codeflix_Bots</blockquote></b>")
+        try: await self.send_message(OWNER_ID, text = f"<b><blockquote>🤖 Bᴏᴛ Rᴇsᴛᴀʀᴛᴇᴅ </blockquote></b>")
         except: pass
 
     async def stop(self, *args):
