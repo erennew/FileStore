@@ -71,43 +71,44 @@ class Bot(Client):
             self.LOGGER(__name__).error(f"Bot startup failed: {e}")
             sys.exit()
 
-    async def _handle_force_subscription(self, force_sub_channel, invite_link_var_name):
-        """Handles forced subscription to a channel and logs the outcome."""
-        if force_sub_channel:
-            try:
-                link = (await self.get_chat(force_sub_channel)).invite_link
-                if not link:
-                    await self.export_chat_invite_link(force_sub_channel)
-                    link = (await self.get_chat(force_sub_channel)).invite_link
-                setattr(self, invite_link_var_name, link)  # Dynamically set the invite link attribute
-            except Exception as a:
-                self.LOGGER(__name__).warning(f"Error with Force Sub Channel: {force_sub_channel} - {a}")
-                self.LOGGER(__name__).warning(f"Bot can't Export Invite link from {force_sub_channel}.")
-                self.LOGGER(__name__).warning(f"Please double-check the {force_sub_channel} and permissions.")
-                setattr(self, invite_link_var_name, None)  # Assign None if there's an issue
-
     async def _check_db_channel(self):
         """Verifies bot is admin in DB Channel and sends a test message."""
         try:
+            # Check if the bot is already verified as an admin
             db_channel = await self.get_chat(CHANNEL_ID)
             self.db_channel = db_channel
-            test = await self.send_message(chat_id=db_channel.id, text="Test Message")
-            await test.delete()
+
+            # You can store the message ID after sending it, so it doesn't get sent again.
+            test_message_sent = False
+
+            # Check if the bot has already sent the test message to avoid re-sending it
+            async for message in self.get_chat_history(db_channel.id, limit=5):  # Check the last 5 messages
+                if message.text == "Test Message":
+                    test_message_sent = True
+                    break
+
+            # Send a test message if it hasn't been sent already
+            if not test_message_sent:
+                test = await self.send_message(chat_id=db_channel.id, text="Test Message")
+                await test.delete()
+
         except Exception as e:
             self.LOGGER(__name__).warning(f"Failed to verify DB channel: {e}")
             self.LOGGER(__name__).warning(f"Make sure bot is admin in DB Channel and double-check the CHANNEL_ID value.")
             sys.exit()
 
-    async def _start_web_server(self):
-        """Starts the web server."""
-        try:
-            app = web.AppRunner(await web_server())
-            await app.setup()
-            await web.TCPSite(app, "0.0.0.0", PORT).start()
-            self.LOGGER(__name__).info(f"Web server started on port {PORT}")
-        except Exception as e:
-            self.LOGGER(__name__).error(f"Failed to start web server: {e}")
-            sys.exit()
+    async def send_file_to_db_channel(self, file):
+        """Send a file to the database channel, but only if it hasn't been sent before."""
+        sent_files = set()  # Ideally, store this in a database or a persistent file
+
+        # Check if the file has already been sent
+        if file.file_id in sent_files:
+            self.LOGGER(__name__).info(f"File {file.file_id} already sent, skipping...")
+            return
+
+        # Send the file if it hasn't been sent before
+        await self.send_document(CHANNEL_ID, file)
+        sent_files.add(file.file_id)  # Add the file ID to the set of sent files
 
     async def stop(self, *args):
         """Stop the bot."""
@@ -125,4 +126,3 @@ class Bot(Client):
             self.LOGGER(__name__).info("Shutting down bot gracefully...")
         finally:
             loop.run_until_complete(self.stop())
-
