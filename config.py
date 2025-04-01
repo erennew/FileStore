@@ -39,7 +39,7 @@ START_PIC = os.environ.get("START_PIC", "https://i.ibb.co/F4ytZfyG/x.jpg")
 FORCE_PIC = os.environ.get("FORCE_PIC", "https://i.ibb.co/FqK4HFX4/x.jpg")
 
 # Enable Token for specific purposes
-TOKEN = True if os.environ.get('TOKEN', "True") == "True" else False 
+TOKEN = True if os.environ.get('TOKEN', "False") == "False" else True 
 #SHORTLINK_URL = os.environ.get("SHORTLINK_URL", "publicearn.online")
 #SHORTLINK_API = os.environ.get("SHORTLINK_API", "adabe1c0675be8ffc5ccbc84a9a65bc5a5d3ec69")
  Verify Expiry time (in seconds)
