@@ -22,7 +22,7 @@ DB_URI = os.environ.get("DATABASE_URL", "mongodb+srv://erenyeagermikasa84:<pkbOX
 DB_NAME = os.environ.get("DATABASE_NAME", "Cluster0")
 
 # Time in seconds for message delete, put 0 to never delete
-TIME = int(os.environ.get("TIME", "30"))
+TIME = int(os.environ.get("TIME", "480"))
 
 # Force subscription channel IDs (0 to disable)
 FORCE_SUB_CHANNEL1 = int(os.environ.get("FORCE_SUB_CHANNEL1", "-1002650862527"))
