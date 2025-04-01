@@ -34,19 +34,19 @@ FORCE_SUB_CHANNEL4 = int(os.environ.get("FORCE_SUB_CHANNEL4", "0"))
 TG_BOT_WORKERS = int(os.environ.get("TG_BOT_WORKERS", "4"))
 
 # Start Image URL
-START_PIC = os.environ.get("START_PIC", "https://i.ibb.co/fdtSRzz3/x.jpg")
+START_PIC = os.environ.get("START_PIC", "https://i.ibb.co/F4ytZfyG/x.jpg")
 # Force Subscription Image URL
 FORCE_PIC = os.environ.get("FORCE_PIC", "https://telegra.ph/file/e292b12890b8b4b9dcbd1.jpg")
 
 # Enable Token for specific purposes
-TOKEN = True if os.environ.get('TOKEN', "False") == "False" else False 
+TOKEN = True if os.environ.get('TOKEN', "True") == "True" else False 
 # Shortlink settings
 SHORTLINK_URL = os.environ.get("SHORTLINK_URL", "publicearn.online")
 SHORTLINK_API = os.environ.get("SHORTLINK_API", "adabe1c0675be8ffc5ccbc84a9a65bc5a5d3ec69")
 # Verify Expiry time (in seconds)
 VERIFY_EXPIRE = int(os.environ.get('VERIFY_EXPIRE', 600))  # Add time in seconds
 # Verification status
-IS_VERIFY = os.environ.get("IS_VERIFY", "False")
+IS_VERIFY = os.environ.get("IS_VERIFY", "True")
 # Tutorial video link
 TUT_VID = os.environ.get("TUT_VID", "https://t.me/hwdownload/3")
 
