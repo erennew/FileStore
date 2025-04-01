@@ -39,16 +39,16 @@ START_PIC = os.environ.get("START_PIC", "https://i.ibb.co/F4ytZfyG/x.jpg")
 FORCE_PIC = os.environ.get("FORCE_PIC", "https://telegra.ph/file/e292b12890b8b4b9dcbd1.jpg")
 
 # Enable Token for specific purposes
-TOKEN = True if os.environ.get('TOKEN', "True") == "True" else False 
+#TOKEN = True if os.environ.get('TOKEN', "True") == "True" else False 
 # Shortlink settings
-SHORTLINK_URL = os.environ.get("SHORTLINK_URL", "publicearn.online")
-SHORTLINK_API = os.environ.get("SHORTLINK_API", "adabe1c0675be8ffc5ccbc84a9a65bc5a5d3ec69")
+#SHORTLINK_URL = os.environ.get("SHORTLINK_URL", "publicearn.online")
+#SHORTLINK_API = os.environ.get("SHORTLINK_API", "adabe1c0675be8ffc5ccbc84a9a65bc5a5d3ec69")
 # Verify Expiry time (in seconds)
-VERIFY_EXPIRE = int(os.environ.get('VERIFY_EXPIRE', 600))  # Add time in seconds
+#VERIFY_EXPIRE = int(os.environ.get('VERIFY_EXPIRE', 600))  # Add time in seconds
 # Verification status
-IS_VERIFY = os.environ.get("IS_VERIFY", "True")
+#IS_VERIFY = os.environ.get("IS_VERIFY", "True")
 # Tutorial video link
-TUT_VID = os.environ.get("TUT_VID", "https://t.me/hwdownload/3")
+#TUT_VID = os.environ.get("TUT_VID", "https://t.me/hwdownload/3")
 
 # Help text for the bot
 #HELP_TXT = "<b><blockquote>ᴛʜɪs ɪs ᴀɴ ғɪʟᴇ ᴛᴏ ʟɪɴᴋ ʙᴏᴛ ᴡᴏʀᴋ ғᴏʀ @Cultuedteluguweeb\n\n❏ ʙᴏᴛ ᴄᴏᴍᴍᴀɴᴅs\n├/start : sᴛᴀʀᴛ ᴛʜᴇ ʙᴏᴛ\n├/about : ᴏᴜʀ Iɴғᴏʀᴍᴀᴛɪᴏɴ\n└/help : ʜᴇʟᴘ ʀᴇʟᴀᴛᴇᴅ ʙᴏᴛ\n\n sɪᴍᴘʟʏ ᴄʟɪᴄᴋ ᴏɴ ʟɪɴᴋ ᴀɴᴅ sᴛᴀʀᴛ ᴛʜᴇ ʙᴏᴛ ᴊᴏɪɴ ʙᴏᴛʜ ᴄʜᴀɴɴᴇʟs ᴀɴᴅ ᴛʀʏ ᴀɢᴀɪɴ ᴛʜᴀᴛs ɪᴛ.....!\n\n ᴅᴇᴠᴇʟᴏᴘᴇᴅ ʙʏ <a href=https://t.me/cosmic_freak>sᴜʙᴀʀᴜ</a></blockquote></b>"
