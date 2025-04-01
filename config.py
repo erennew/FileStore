@@ -39,15 +39,13 @@ START_PIC = os.environ.get("START_PIC", "https://i.ibb.co/F4ytZfyG/x.jpg")
 FORCE_PIC = os.environ.get("FORCE_PIC", "https://i.ibb.co/FqK4HFX4/x.jpg")
 
 # Enable Token for specific purposes
-TOKEN = True if os.environ.get('TOKEN', "False") == "False" else True 
-#SHORTLINK_URL = os.environ.get("SHORTLINK_URL", "publicearn.online")
-#SHORTLINK_API = os.environ.get("SHORTLINK_API", "adabe1c0675be8ffc5ccbc84a9a65bc5a5d3ec69")
- Verify Expiry time (in seconds)
-VERIFY_EXPIRE = int(os.environ.get('VERIFY_EXPIRE', 600))  # Add time in seconds
- Verification status
-IS_VERIFY = os.environ.get("IS_VERIFY", "True")
-#Tutorial video link
-TUT_VID = os.environ.get("TUT_VID", "https://t.me/hwdownload/3")
+TOKEN = False if os.environ.get('TOKEN', "True") == "True" else False
+SHORTLINK_URL = os.environ.get("SHORTLINK_URL", "https://example.com")  # Change to a placeholder or irrelevant URL
+SHORTLINK_API = os.environ.get("SHORTLINK_API", "dummy_api_key")  # Replace with a dummy key or keep it disabled
+VERIFY_EXPIRE = int(os.environ.get('VERIFY_EXPIRE', 0))  # Set to 0 to disable expiration
+IS_VERIFY = os.environ.get("IS_VERIFY", "False")  # Set to "False" to turn off verification
+TUT_VID = os.environ.get("TUT_VID", "")  # Empty or change to a different irrelevant URL
+
 
 # Help text for the bot
 
