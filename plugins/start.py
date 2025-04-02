@@ -146,7 +146,7 @@ async def start_command(client: Client, message: Message):
 
         if FILE_AUTO_DELETE > 0:
             notification_msg = await message.reply(
-                f"<b>This file will be deleted in {get_exp_time(FILE_AUTO_DELETE)}. Please save or forward it to your saved messages before it gets deleted.</b>"
+                f"<b>This file will be deleted in {get_exp_time(FILE_AUTO_DELETE)}(Due To Copyright Issues). 📌Please save or forward it to your saved messages before it gets deleted.</b>"
             )
 
             await asyncio.sleep(FILE_AUTO_DELETE)
@@ -177,7 +177,7 @@ async def start_command(client: Client, message: Message):
     else:
         reply_markup = InlineKeyboardMarkup(
             [
-                    [InlineKeyboardButton("• MAIN ᴄʜᴀɴɴᴇʟ •", url="https://t.me/Cultuedteluguweeb")],
+                    [InlineKeyboardButton("• ᴍᴀɪɴ ᴄʜᴀɴɴᴇʟ •", url="https://t.me/CulturedTeluguweeb")],
 
     [
                     InlineKeyboardButton("• ᴀʙᴏᴜᴛ", callback_data = "about"),
@@ -196,7 +196,7 @@ async def start_command(client: Client, message: Message):
                 id=message.from_user.id
             ),
             reply_markup=reply_markup#,
-            #message_effect_id=5104841245755180586  # 🔥
+            #message_effect_id=5104841245755180586  # 
         )
         return
 
@@ -214,42 +214,42 @@ async def not_joined(client: Client, message: Message):
     # Check if the first and second channels are both set
     if FORCE_SUB_CHANNEL1 and FORCE_SUB_CHANNEL2:
         buttons.append([
-            InlineKeyboardButton(text="• ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ", url=client.invitelink1),
-            InlineKeyboardButton(text="ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ •", url=client.invitelink2),
+            InlineKeyboardButton(text=" ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ 1✨", url=client.invitelink1),
+            InlineKeyboardButton(text=" ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ 2⚡", url=client.invitelink2),
         ])
     # Check if only the first channel is set
     elif FORCE_SUB_CHANNEL1:
         buttons.append([
-            InlineKeyboardButton(text="• ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ•", url=client.invitelink1)
+            InlineKeyboardButton(text=" ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ 1✨", url=client.invitelink1)
         ])
     # Check if only the second channel is set
     elif FORCE_SUB_CHANNEL2:
         buttons.append([
-            InlineKeyboardButton(text="• ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ•", url=client.invitelink2)
+            InlineKeyboardButton(text=" ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ 2⚡", url=client.invitelink2)
         ])
 
     # Check if the third and fourth channels are set
     if FORCE_SUB_CHANNEL3 and FORCE_SUB_CHANNEL4:
         buttons.append([
-            InlineKeyboardButton(text="• ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ", url=client.invitelink3),
-            InlineKeyboardButton(text="ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ •", url=client.invitelink4),
+            InlineKeyboardButton(text=" ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ 3🌹", url=client.invitelink3),
+            InlineKeyboardButton(text=" ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ 4🔥", url=client.invitelink4),
         ])
     # Check if only the first channel is set
     elif FORCE_SUB_CHANNEL3:
         buttons.append([
-            InlineKeyboardButton(text="• ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ•", url=client.invitelink3)
+            InlineKeyboardButton(text=" ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ 3🌹", url=client.invitelink3)
         ])
     # Check if only the second channel is set
     elif FORCE_SUB_CHANNEL4:
         buttons.append([
-            InlineKeyboardButton(text="• ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ•", url=client.invitelink4)
+            InlineKeyboardButton(text=" ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ 4🔥", url=client.invitelink4)
         ])
 
     # Append "Try Again" button if the command has a second argument
     try:
         buttons.append([
             InlineKeyboardButton(
-                text="ʀᴇʟᴏᴀᴅ",
+                text="ʀᴇʟᴏᴀᴅ🔄️",
                 url=f"https://t.me/{client.username}?start={message.command[1]}"
             )
         ])
