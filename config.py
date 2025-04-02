@@ -12,7 +12,7 @@ API_HASH = os.environ.get("API_HASH", "449da69cf4081dc2cc74eea828d0c490")
 # Your db channel Id
 CHANNEL_ID = int(os.environ.get("CHANNEL_ID", "-1002659351510"))
 # NAMA OWNER
-OWNER = os.environ.get("OWNER", "roxcy")
+OWNER = os.environ.get("OWNER", "senku")
 # OWNER ID
 OWNER_ID = int(os.environ.get("OWNER_ID", "1047253913"))
 # Port
@@ -22,12 +22,12 @@ DB_URI = os.environ.get("DATABASE_URL", "mongodb+srv://erenyeagermikasa84:<pkbOX
 DB_NAME = os.environ.get("DATABASE_NAME", "Cluster0")
 
 # Time in seconds for message delete, put 0 to never delete
-TIME = int(os.environ.get("TIME", "480"))
+TIME = int(os.environ.get("TIME", "900"))
 
 # Force subscription channel IDs (0 to disable)
 FORCE_SUB_CHANNEL1 = int(os.environ.get("FORCE_SUB_CHANNEL1", "-1002650862527"))
-FORCE_SUB_CHANNEL2 = int(os.environ.get("FORCE_SUB_CHANNEL2", "0"))
-FORCE_SUB_CHANNEL3 = int(os.environ.get("FORCE_SUB_CHANNEL3", "0"))
+FORCE_SUB_CHANNEL2 = int(os.environ.get("FORCE_SUB_CHANNEL2", "-1002331321194"))
+FORCE_SUB_CHANNEL3 = int(os.environ.get("FORCE_SUB_CHANNEL3", "-1001956677010"))
 FORCE_SUB_CHANNEL4 = int(os.environ.get("FORCE_SUB_CHANNEL4", "0"))
 
 # Set the number of workers for the bot
@@ -49,10 +49,10 @@ TUT_VID = os.environ.get("TUT_VID", "")  # Empty or change to a different irrele
 
 # Help text for the bot
 
-#HELP_TXT = "<b><blockquote>ᴛʜɪs ɪs ᴀɴ ғɪʟᴇ ᴛᴏ ʟɪɴᴋ ʙᴏᴛ ᴡᴏʀᴋ ғᴏʀ @Nova_Flix\n\n❏ ʙᴏᴛ ᴄᴏᴍᴍᴀɴᴅs\n├/start : sᴛᴀʀᴛ ᴛʜᴇ ʙᴏᴛ\n├/about : ᴏᴜʀ Iɴғᴏʀᴍᴀᴛɪᴏɴ\n└/help : ʜᴇʟᴘ ʀᴇʟᴀᴛᴇᴅ ʙᴏᴛ\n\n sɪᴍᴘʟʏ ᴄʟɪᴄᴋ ᴏɴ ʟɪɴᴋ ᴀɴᴅ sᴛᴀʀᴛ ᴛʜᴇ ʙᴏᴛ ᴊᴏɪɴ ʙᴏᴛʜ ᴄʜᴀɴɴᴇʟs ᴀɴᴅ ᴛʀʏ ᴀɢᴀɪɴ ᴛʜᴀᴛs ɪᴛ.....!\n\n ᴅᴇᴠᴇʟᴏᴘᴇᴅ ʙʏ <a href=https://t.me/cosmic_freak>sᴜʙᴀʀᴜ</a></blockquote></b>"
+HELP_TXT = "<b><blockquote>ᴛʜɪs ɪs ᴀɴ ғɪʟᴇ ᴛᴏ ʟɪɴᴋ ʙᴏᴛ ᴡᴏʀᴋ ғᴏʀ @Culturedteluguweeb\n\n❏ ʙᴏᴛ ᴄᴏᴍᴍᴀɴᴅs\n├/start : sᴛᴀʀᴛ ᴛʜᴇ ʙᴏᴛ\n├/about : ᴏᴜʀ Iɴғᴏʀᴍᴀᴛɪᴏɴ\n└/help : ʜᴇʟᴘ ʀᴇʟᴀᴛᴇᴅ ʙᴏᴛ\n\n sɪᴍᴘʟʏ ᴄʟɪᴄᴋ ᴏɴ ʟɪɴᴋ ᴀɴᴅ sᴛᴀʀᴛ ᴛʜᴇ ʙᴏᴛ ᴊᴏɪɴ ʙᴏᴛʜ ᴄʜᴀɴɴᴇʟs ᴀɴᴅ ᴛʀʏ ᴀɢᴀɪɴ ᴛʜᴀᴛs ɪᴛ.....!</blockquote></b>"
 
 # About text for the bot
-#ABOUT_TXT = "<b><blockquote>◈ ᴄʀᴇᴀᴛᴏʀ: <a href=https://t.me/cosmic_freak>Yato</a>\n◈ ꜰᴏᴜɴᴅᴇʀ ᴏꜰ : <a href=https://t.me/otakuflix_network>ᴏᴛᴀᴋᴜғʟɪx ɴᴇᴛᴡᴏʀᴋ</a>\n◈ ᴀɴɪᴍᴇ ᴄʜᴀɴɴᴇʟ : <a href=https://t.me/anime_cruise_netflix>ᴀɴɪᴍᴇ ᴄʀᴜɪsᴇ</a>\n◈ sᴇʀɪᴇs ᴄʜᴀɴɴᴇʟ : <a href=https://t.me/webseries_flix>ᴡᴇʙsᴇʀɪᴇs ғʟɪx</a>\n◈ ᴀᴅᴜʟᴛ ᴍᴀɴʜᴡᴀ : <a href=https://t.me/pornhwa_flix>ᴘᴏʀɴʜᴡᴀs</a>\n◈ ᴅᴇᴠᴇʟᴏᴘᴇʀ : <a href=https://t.me/cosmic_freak>subaru</a></blockquote></b>"
+ABOUT_TXT = "<b><blockquote>◈ ᴍᴀɪɴ ᴄʜᴀɴɴᴇʟ : <a href=https://t.me/CulturedTeluguweeb> ᴄᴜʟᴛᴜʀᴇᴅ ᴡᴇᴇʙ </a>\n◈ ᴏɴɢᴏɪɴɢ ᴄʜᴀɴɴᴇʟ : <a href=https://t.me/+BiVvkpD5ieIxZTNl>ᴏɴɢᴏɪɴɢ ᴄᴛᴡ </a>\n◈ ᴄᴏᴍᴘʟᴇᴛᴇᴅ ᴀɴɪᴍᴇꜱ : <a href=https://t.me/+uCZlBWrgKCMyYmI1>ᴄᴛᴡ ᴀɴɪᴅᴇx</a></blockquote></b>"
 
 # Start message for the bot
 START_MSG = os.environ.get("START_MESSAGE", "<blockquote><b> 𝐇𝐈 {first}✨ Cᴏᴍᴇ ғᴏʀ ᴛʜᴇ ᴇxᴘᴇʀɪᴇɴᴄᴇ, ᴅᴏɴ'ᴛ ᴍɪss ᴍʏ ᴄᴏᴏᴋɪɴɢ! <blockquote></b>\n<blockquote> The perfect dish can heal the soul! .</blockquote></b>")
@@ -65,16 +65,16 @@ except ValueError:
     raise Exception("Your Admins list does not contain valid integers.")
 
 # Force subscription message
-FORCE_MSG = os.environ.get("FORCE_SUB_MESSAGE", "ʜᴇʟʟᴏ {first}✌️\n\n<b> <blockquote>ᴊᴏɪɴ ᴏᴜʀ ᴄʜᴀɴɴᴇʟs ᴀɴᴅ ᴛʜᴇɴ ᴄʟɪᴄᴋ ᴏɴ ʀᴇʟᴏᴀᴅ button ᴛᴏ ɢᴇᴛ ʏᴏᴜʀ ʀᴇǫᴜᴇꜱᴛᴇᴅ ꜰɪʟᴇ.<blockquote></b>")
+FORCE_MSG = os.environ.get("FORCE_SUB_MESSAGE", "<blockquote><b> ʜᴇʟʟᴏ {first}✌️<blockquote></b> \n\n<blockquote>ᴊᴏɪɴ ᴏᴜʀ ᴄʜᴀɴɴᴇʟs ᴀɴᴅ ᴛʜᴇɴ ᴄʟɪᴄᴋ ᴏɴ ʀᴇʟᴏᴀᴅ button ᴛᴏ ɢᴇᴛ ʏᴏᴜʀ ʀᴇǫᴜᴇꜱᴛᴇᴅ ꜰɪʟᴇ.</blockquote></b>")
 
 # Custom Caption for files
-CUSTOM_CAPTION = os.environ.get("CUSTOM_CAPTION", "<b>• ʙʏ @Culturedteluguweeb</b>")
+CUSTOM_CAPTION = os.environ.get("CUSTOM_CAPTION", "<blockquote>• ʙʏ @Culturedteluguweeb<blockquote></b>")
 
 # Set to True if you want to protect content (prevent forwarding)
-PROTECT_CONTENT = True if os.environ.get('PROTECT_CONTENT', "False") == "True" else False
+PROTECT_CONTENT = False if os.environ.get('PROTECT_CONTENT', "False") == "True" else False
 
 # Set to True to disable channel posts share button
-DISABLE_CHANNEL_BUTTON = os.environ.get("DISABLE_CHANNEL_BUTTON", None) == 'True'
+DISABLE_CHANNEL_BUTTON = os.environ.get("DISABLE_CHANNEL_BUTTON", None) == 'False'
 
 # Bot uptime text format
 BOT_STATS_TEXT = "<b>BOT UPTIME</b>\n{uptime}"
@@ -84,7 +84,7 @@ USER_REPLY_TEXT = "ʙᴀᴋᴋᴀ ! ʏᴏᴜ ᴀʀᴇ ɴᴏᴛ ᴍʏ ꜱᴇɴᴘ
 
 # Add more Admins if needed
 ADMINS.append(OWNER_ID)
-ADMINS.append(6497757690)
+ADMINS.append(7187218010)
 
 # Log file name for bot operations
 LOG_FILE_NAME = "filesharingbot.txt"
