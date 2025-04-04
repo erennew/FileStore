@@ -35,13 +35,29 @@ TUT_VID = f"{TUT_VID}"
 
 @Bot.on_message(filters.command('start') & filters.private & subscribed1 & subscribed2 & subscribed3 & subscribed4)
 async def start_command(client: Client, message: Message):
-    id = message.from_user.id
-    if not await present_user(id):
-        try:
-            await add_user(id)
-        except:
-            pass
-    await send_start_animation(message)
+id = message.from_user.id
+
+# 🌐 Anti-flood delay
+await asyncio.sleep(random.uniform(0.3, 1.2))
+
+# ✍️ Typing action
+await client.send_chat_action(message.chat.id, "typing")
+
+# ⏳ Loading spinner message
+loading_msg = await message.reply("⏳ Loading, please wait...")
+
+# 👥 Add user to DB if new
+if not await present_user(id):
+    try:
+        await add_user(id)
+    except:
+        pass
+
+# 🧹 Delete the loading message before sending GIF
+await loading_msg.delete()
+
+# 🎬 Send start animation (like before)
+await send_start_animation(message)
 
     # Check if user is an admin and treat them as verified
     if id in ADMINS:
