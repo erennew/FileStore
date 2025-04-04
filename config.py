@@ -24,7 +24,7 @@ OWNER = os.environ.get("OWNER", "senku")
 # OWNER ID
 OWNER_ID = int(os.environ.get("OWNER_ID", "1047253913"))
 # Port
-PORT = os.environ.get("PORT", "8000")
+PORT = os.environ.get("PORT", "8080")
 # Database
 DB_URI = os.environ.get("DATABASE_URL", "mongodb+srv://atlas-sample-dataset-load-67eff8d72541040a56260769:<Elx646yTQK2ubS1l>@cluster0.gmnkeqi.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 DB_NAME = os.environ.get("DATABASE_NAME", "Cluster0")
