@@ -208,5 +208,34 @@ async def send_end_animation(message: Message):
     if END_GIFS:
         gif = random.choice(END_GIFS)
         await message.reply_animation(animation=gif)
+# helper_func.py
+
+import time
+from collections import defaultdict
+
+# Other helper functions (if any)...
+
+user_timestamps = defaultdict(list)
+
+def rate_limit(limit: int, time_window: int):
+    def decorator(func):
+        async def wrapper(client, message):
+            user_id = message.from_user.id
+            now = time.time()
+            timestamps = user_timestamps[user_id]
+
+            # Remove timestamps outside the time window
+            user_timestamps[user_id] = [
+                t for t in timestamps if now - t < time_window
+            ]
+
+            if len(user_timestamps[user_id]) >= limit:
+                await message.reply("⛔ Too many requests. Please try again later.")
+                return
+
+            user_timestamps[user_id].append(now)
+            await func(client, message)
+        return wrapper
+    return decorator
 
 #rohit_1888 on Tg :
