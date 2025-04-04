@@ -23,72 +23,75 @@ from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, 
 from pyrogram.errors import FloodWait, UserIsBlocked, InputUserDeactivated, UserNotParticipant
 
 from bot import Bot
-from database.database import *  # Only if needed, or import specific functions
-from config import MAX_REQUESTS, TIME_WINDOW, START_GIFS, GREETING_CAPTION, CHANNEL_IDS, OWNER_ID
+from database.database import add_user, present_user
+from config import MAX_REQUESTS, TIME_WINDOW, START_GIFS, GREETING_CAPTION, CHANNEL_IDS, OWNER_ID, TUT_VID, FILE_AUTO_DELETE
 from helper_func import send_start_animation, send_end_animation, rate_limit
 
+# Subscribed filters must be defined somewhere
+from plugins.force_sub import subscribed1, subscribed2, subscribed3, subscribed4
 
-# File auto-delete time in seconds (Set your desired time in seconds here)
-FILE_AUTO_DELETE = TIME  # Example: 3600 seconds (1 hour)
-TUT_VID = f"{TUT_VID}"
+# In-memory store for custom rate limiting
 user_rate_limit = {}
-MAX_REQUESTS = 3  # Max start/file requests per user
-TIME_WINDOW = 60  # Time window in seconds (1 minute)
-@Bot.on_message(filters.command('start') & filters.private & subscribed1 & subscribed2 & subscribed3 & subscribed4)
-async def start_command(client: Client, message: Message):
-id = message.from_user.id
 
- # 🕒 Time-based greeting (Night mode)
+@Bot.on_message(filters.command("start") & filters.private & subscribed1 & subscribed2 & subscribed3 & subscribed4)
+async def start_command(client: Client, message: Message):
+    user_id = message.from_user.id
+
+    # 🌙 Night mode greeting
     hour = datetime.now().hour
     if hour >= 22 or hour < 6:
         await message.reply("🌙 Luffy is sleepy but still here for you~")
 
-    # ⛔️ Rate Limiting Block
-    now = time()
-    reqs = user_rate_limit.get(id, [])
+    # 🚫 Manual Rate Limiting
+    now = time.time()
+    reqs = user_rate_limit.get(user_id, [])
     reqs = [t for t in reqs if now - t < TIME_WINDOW]
     if len(reqs) >= MAX_REQUESTS:
         return await message.reply("⚠️ You’re clicking too fast! Please wait a bit and try again.")
     reqs.append(now)
-    user_rate_limit[id] = reqs
+    user_rate_limit[user_id] = reqs
 
-    # 🌐 Anti-flood delay
+    # ⏱ Random delay + typing action
     await asyncio.sleep(random.uniform(0.3, 1.2))
-
-    # ✍️ Typing action
     await client.send_chat_action(message.chat.id, "typing")
     await asyncio.sleep(1.5)
 
-    # 👒 LUFFY Bot Multi-Stage Boot Sequence
+    # 👒 Boot sequence
     progress = await message.reply("👒 Booting LUFFY File Core...")
 
-    await asyncio.sleep(random.uniform(0.6, 1.1))
-    await progress.edit("⚙️ Warming up LUFFY's Gear Engine...")
+    steps = [
+        "⚙️ Warming up LUFFY's Gear Engine...",
+        "📡 Connecting to Grand Line Server...",
+        "🔍 Scanning for Devil Fruit permissions...",
+        "🧰 Loading Straw Hat Modules...",
+        f"🔐 Validating Crew Access for <b>@{message.from_user.username or 'Privateer'}</b>...",
+        "✅ LUFFY is Ready to Sail! 🏴‍☠️"
+    ]
 
-    await asyncio.sleep(random.uniform(0.6, 1.1))
-    await progress.edit("📡 Connecting to Grand Line Server...")
-
-    await asyncio.sleep(random.uniform(0.6, 1.1))
-    await progress.edit("🔍 Scanning for Devil Fruit permissions...")
-
-    await asyncio.sleep(random.uniform(0.6, 1.1))
-    await progress.edit("🧰 Loading Straw Hat Modules...")
-
-    await asyncio.sleep(random.uniform(0.6, 1.1))
-    await progress.edit("🔐 Validating Crew Access for <b>@{}</b>...".format(message.from_user.username or "Privateer"))
-
-    await asyncio.sleep(random.uniform(0.6, 1.1))
-    await progress.edit("✅ LUFFY is Ready to Sail! 🏴‍☠️")
+    for step in steps:
+        await asyncio.sleep(random.uniform(0.6, 1.1))
+        await progress.edit(step)
 
     await asyncio.sleep(random.uniform(0.5, 0.8))
     await progress.delete()
 
-    # 🎇 Send fun animated reaction
- await message.reply_animation(
-    animation=random.choice(START_GIFS),
-    caption=GREETING_CAPTION,
-    parse_mode="Markdown"
-)
+    # ✨ Send animated welcome
+    await message.reply_animation(
+        animation=random.choice(START_GIFS),
+        caption=GREETING_CAPTION,
+        parse_mode="Markdown"
+    )
+
+    # ✅ Add user to DB if new
+    if not await present_user(user_id):
+        try:
+            await add_user(user_id)
+        except Exception:
+            pass
+
+    # 🎬 Optional: Extra welcome animation
+    await send_start_animation(message)
+
 
 
     # ✅ Add user if not present
