@@ -171,24 +171,25 @@ async def start_command(client: Client, message: Message):
                 print(f"Error decoding IDs: {e}")
                 return
 
-        elif len(argument) == 2:
-            try:
-                ids = [int(int(argument[1]) / abs(client.db_channel.id))]
-            except Exception as e:
-                print(f"Error decoding ID: {e}")
-                return
-
-        temp_msg = await message.reply("Please wait...")
+    elif len(argument) == 2:
         try:
-            messages = await get_messages(client, ids)
+            ids = [int(int(argument[1]) / abs(client.db_channel.id))]
         except Exception as e:
-            await message.reply_text("Something went wrong!")
-            print(f"Error getting messages: {e}")
+            print(f"Error decoding ID: {e}")
             return
-        finally:
-            await temp_msg.delete()
 
-               codeflix_msgs = []
+    temp_msg = await message.reply("Please wait...")
+    try:
+        messages = await get_messages(client, ids)
+    except Exception as e:
+        await message.reply_text("Something went wrong!")
+        print(f"Error getting messages: {e}")
+        return
+    finally:
+        await temp_msg.delete()
+
+    codeflix_msgs = []
+
         for msg in messages:
             caption = (CUSTOM_CAPTION.format(previouscaption="" if not msg.caption else msg.caption.html, 
                                              filename=msg.document.file_name) if bool(CUSTOM_CAPTION) and bool(msg.document)
