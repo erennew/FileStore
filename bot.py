@@ -93,7 +93,7 @@ from bot import Bot  # Assuming your Bot client is defined in bot.py or main.py
 # 🔁 Admin-only restart command
 @Bot.on_message(filters.command("restart") & filters.private)
 async def restart_bot(client, message: Message):
-    if message.from_user.id != ADMIN_ID:
+    if message.from_user.id != OWNER_ID:
         return await message.reply("🚫 Only the admin can restart the bot.")
 
     await message.reply("♻️ Restarting LUFFY bot...")
