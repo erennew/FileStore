@@ -69,6 +69,21 @@ class Bot(Client):
     async def stop(self, *args):
         await super().stop()
         self.LOGGER(__name__).info("Bot stopped.")
+        from pyrogram import filters
+from pyrogram.types import Message
+import random
+
+ANIME_GIFS = [
+    "https://media.giphy.com/media/11kEuHSQAXXiGQ/giphy.gif",
+    "https://media.giphy.com/media/XIqCQx02E1U9W/giphy.gif",
+    "https://media.giphy.com/media/v6aOjy0Qo1fIA/giphy.gif"
+]
+
+@Bot.on_message(filters.text & filters.private)
+async def anime_reply(_, message: Message):
+    gif = random.choice(ANIME_GIFS)
+    await message.reply_animation(animation=gif, caption="✨ I only work for my master @CulturedTeluguweeb-sama~ 🌸")
+
 
     def run(self):
         """Run the bot."""
