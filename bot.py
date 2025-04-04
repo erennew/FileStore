@@ -87,7 +87,7 @@ class Bot(Client):
                 self.LOGGER(__name__).info("\nBot Stopped. https://t.me/weebs_support for support")
                 sys.exit()
         try:
-            db_channel = await self.get_chat(CHANNEL_ID)
+            db_channel = await self.get_chat(CHANNEL_IDS)
             self.db_channel = db_channel
             test = await self.send_message(chat_id = db_channel.id, text = "Test Message")
             await test.delete()
