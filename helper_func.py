@@ -193,31 +193,20 @@ subscribed1 = filters.create(is_subscribed1)
 subscribed2 = filters.create(is_subscribed2)
 subscribed3 = filters.create(is_subscribed3)
 subscribed4 = filters.create(is_subscribed4)
+from config import START_GIFS, END_GIFS
 import random
 from pyrogram.types import Message
 
-# List of start GIFs
-START_GIFS = [
-    "https://telegra.ph/file/start-gif-1.mp4",
-    "https://telegra.ph/file/start-gif-2.mp4",
-    "https://telegra.ph/file/start-gif-3.mp4"
-]
-
-# List of end GIFs
-END_GIFS = [
-    "https://telegra.ph/file/end-gif-1.mp4",
-    "https://telegra.ph/file/end-gif-2.mp4",
-    "https://telegra.ph/file/end-gif-3.mp4"
-]
-
 # Function to send random start GIF
 async def send_start_animation(message: Message):
-    gif = random.choice(START_GIFS)
-    await message.reply_animation(animation=gif)
+    if START_GIFS:
+        gif = random.choice(START_GIFS)
+        await message.reply_animation(animation=gif)
 
 # Function to send random end GIF
 async def send_end_animation(message: Message):
-    gif = random.choice(END_GIFS)
-    await message.reply_animation(animation=gif)
+    if END_GIFS:
+        gif = random.choice(END_GIFS)
+        await message.reply_animation(animation=gif)
 
 #rohit_1888 on Tg :
