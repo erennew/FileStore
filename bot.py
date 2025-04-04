@@ -69,21 +69,32 @@ class Bot(Client):
     async def stop(self, *args):
         await super().stop()
         self.LOGGER(__name__).info("Bot stopped.")
-        from pyrogram import filters
+from pyrogram import filters
 from pyrogram.types import Message
+import os
+import sys
+import asyncio
 import random
+from config import ADMIN_ID, START_GIFS
+from bot import Bot  # Assuming your Bot client is defined in bot.py or main.py
 
-ANIME_GIFS = [
-    "https://media.giphy.com/media/11kEuHSQAXXiGQ/giphy.gif",
-    "https://media.giphy.com/media/XIqCQx02E1U9W/giphy.gif",
-    "https://media.giphy.com/media/v6aOjy0Qo1fIA/giphy.gif"
-]
+# 🔁 Admin-only restart command
+@Bot.on_message(filters.command("restart") & filters.private)
+async def restart_bot(client, message: Message):
+    if message.from_user.id != ADMIN_ID:
+        return await message.reply("🚫 Only the admin can restart the bot.")
 
+    await message.reply("♻️ Restarting LUFFY bot...")
+    await asyncio.sleep(2)
+    await message.reply("🔄 Bot is now restarting!")
+    
+    os.execv(sys.executable, [sys.executable] + sys.argv)
+
+# ✨ Anime-style reply using START_GIFS
 @Bot.on_message(filters.text & filters.private)
 async def anime_reply(_, message: Message):
-    gif = random.choice(ANIME_GIFS)
+    gif = random.choice(START_GIFS)
     await message.reply_animation(animation=gif, caption="✨ I only work for my master @CulturedTeluguweeb-sama~ 🌸")
-
 
     def run(self):
         """Run the bot."""
