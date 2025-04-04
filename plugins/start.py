@@ -212,14 +212,13 @@ async def start_command(client: Client, message: Message):
 
         if codeflix_msgs:
             # Your logic here
-            ...
-
-             end_gif = await send_end_animation(message)
-             await asyncio.sleep(20)
-               try:
-            await end_gif.delete()
+            end_gif = await send_end_animation(message)
+            await asyncio.sleep(20)
+            try:
+                await end_gif.delete()
             except:
-            pass
+                pass
+
   
     
         if FILE_AUTO_DELETE > 0:
