@@ -1,13 +1,15 @@
-from pyrogram import Client
-from pyrogram import filters
+import os, sys, asyncio, random, logging, time
+from datetime import datetime
+from aiohttp import web
+from pyrogram import Client, filters
+from pyrogram.enums import ParseMode
 from pyrogram.types import Message
-import os
-import sys
-import asyncio
-import random
-from config import API_HASH, APP_ID, TG_BOT_TOKEN, TG_BOT_WORKERS,OWNER_ID, START_GIFS
-from helper_func import rate_limit  # ✅ If you created it here
-from config import MAX_REQUESTS, TIME_WINDOW
+from config import *
+from helper_func import rate_limit
+from plugins import web_server
+
+LOGGER = logging.getLogger(__name__)
+logging.basicConfig(level=logging.INFO)
 class Bot(Client):
     def __init__(self):
         super().__init__(
