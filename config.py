@@ -9,6 +9,14 @@ TG_BOT_TOKEN = os.environ.get("TG_BOT_TOKEN", "7598604465:AAHmYBl6oxcJBNgSCuF9p4
 APP_ID = int(os.environ.get("APP_ID", "24500584"))
 # Your API Hash from my.telegram.org
 API_HASH = os.environ.get("API_HASH", "449da69cf4081dc2cc74eea828d0c490")
+
+MAX_REQUESTS = int(os.getenv("MAX_REQUESTS", 3))
+TIME_WINDOW = int(os.getenv("TIME_WINDOW", 60))
+
+GREETING_CAPTION = os.getenv("GREETING_CAPTION", "👒 *Hey you!* I've got one thing to say...\n\n🔥 *JOIN MY CREW!* Let’s find the One Piece together! ☠️")
+
+START_GIFS = os.getenv("START_GIFS", "").split(",")
+END_GIFS = os.getenv("END_GIFS", "").split(",")
 # Your db channel Id
 CHANNEL_IDS = [int(x) for x in os.environ.get("CHANNEL_ID", "").split(",") if x]
 # NAMA OWNER
@@ -24,8 +32,6 @@ DB_NAME = os.environ.get("DATABASE_NAME", "Cluster0")
 # Time in seconds for message delete, put 0 to never delete
 TIME = int(os.environ.get("TIME", "900"))
 
-START_GIFS = os.getenv("START_GIFS", "").split(",")
-END_GIFS = os.getenv("END_GIFS", "").split(",")
 
 # Force subscription channel IDs (0 to disable)
 FORCE_SUB_CHANNEL1 = int(os.environ.get("FORCE_SUB_CHANNEL1", "-1002650862527"))
