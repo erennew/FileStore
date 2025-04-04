@@ -5,7 +5,7 @@ import os
 import sys
 import asyncio
 import random
-from config import ADMIN_ID, START_GIFS
+from config import OWNER_ID, START_GIFS
 class Bot(Client):
     def __init__(self):
         super().__init__(
@@ -83,7 +83,7 @@ import os
 import sys
 import asyncio
 import random
-from config import ADMIN_ID, START_GIFS
+from config import OWNER_ID, START_GIFS
 from bot import Bot  # Assuming your Bot client is defined in bot.py or main.py
 
 # 🔁 Admin-only restart command
