@@ -5,7 +5,9 @@ import os
 import sys
 import asyncio
 import random
-from config import OWNER_ID, START_GIFS
+from config import API_HASH, APP_ID, TG_BOT_TOKEN, TG_BOT_WORKERS,OWNER_ID, START_GIFS
+from helper_func import rate_limit  # ✅ If you created it here
+from config import MAX_REQUESTS, TIME_WINDOW
 class Bot(Client):
     def __init__(self):
         super().__init__(
