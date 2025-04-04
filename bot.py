@@ -1,3 +1,11 @@
+from pyrogram import Client
+from pyrogram import filters
+from pyrogram.types import Message
+import os
+import sys
+import asyncio
+import random
+from config import ADMIN_ID, START_GIFS
 class Bot(Client):
     def __init__(self):
         super().__init__(
