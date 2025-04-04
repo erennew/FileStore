@@ -188,7 +188,7 @@ async def start_command(client: Client, message: Message):
         finally:
             await temp_msg.delete()
 
-        codeflix_msgs = []
+               codeflix_msgs = []
         for msg in messages:
             caption = (CUSTOM_CAPTION.format(previouscaption="" if not msg.caption else msg.caption.html, 
                                              filename=msg.document.file_name) if bool(CUSTOM_CAPTION) and bool(msg.document)
@@ -208,11 +208,14 @@ async def start_command(client: Client, message: Message):
             except Exception as e:
                 print(f"Failed to send message: {e}")
                 pass
-         if codeflix_msgs:
-         
+
+        if codeflix_msgs:
+            # Your logic here
+            ...
+
              end_gif = await send_end_animation(message)
              await asyncio.sleep(20)
-          try:
+               try:
             await end_gif.delete()
             except:
             pass
@@ -232,7 +235,7 @@ async def start_command(client: Client, message: Message):
                     except Exception as e:
                         print(f"Error deleting message {snt_msg.id}: {e}")
 
-            try:
+                 try:
                 reload_url = (
                     f"https://t.me/{client.username}?start={message.command[1]}"
                     if message.command and len(message.command) > 1
