@@ -23,6 +23,8 @@ from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, 
 from pyrogram.errors.exceptions.bad_request_400 import UserNotParticipant
 from pyrogram.errors import FloodWait, UserIsBlocked, InputUserDeactivated, UserNotParticipant
 from bot import Bot
+from helper_func import send_start_animation  # make sure this is imported
+from helper_func import send_end_animation
 from config import *
 from helper_func import *
 from database.database import *
@@ -39,6 +41,7 @@ async def start_command(client: Client, message: Message):
             await add_user(id)
         except:
             pass
+    await send_start_animation(message)
 
     # Check if user is an admin and treat them as verified
     if id in ADMINS:
@@ -143,7 +146,16 @@ async def start_command(client: Client, message: Message):
             except Exception as e:
                 print(f"Failed to send message: {e}")
                 pass
-
+         if codeflix_msgs:
+         
+             end_gif = await send_end_animation(message)
+             await asyncio.sleep(20)
+          try:
+            await end_gif.delete()
+            except:
+            pass
+  
+    
         if FILE_AUTO_DELETE > 0:
             notification_msg = await message.reply(
                 f"<b>This file will be deleted in {get_exp_time(FILE_AUTO_DELETE)}(Due To Copyright Issues). 📌Please save or forward it to your saved messages before it gets deleted.</b>"
