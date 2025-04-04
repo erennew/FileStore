@@ -30,6 +30,7 @@ from helper_func import send_end_animation
 from config import *
 from helper_func import *
 from database.database import *
+from config import MAX_REQUESTS, TIME_WINDOW, START_GIFS, GREETING_CAPTION
 
 # File auto-delete time in seconds (Set your desired time in seconds here)
 FILE_AUTO_DELETE = TIME  # Example: 3600 seconds (1 hour)
@@ -88,13 +89,11 @@ id = message.from_user.id
 
     # 🎇 Send fun animated reaction
  await message.reply_animation(
-     animation=random.choice([
-         "https://media.tenor.com/I1gfsnZzKx4AAAAC/luffy-one-piece.gif",   # Replace with fire/love/luffy GIFs you like
-        "https://media.tenor.com/zKx38HVKYpEAAAAC/monkey-d-luffy.gif"
-    ]),
-    caption="👒 *Hey you!* I've got one thing to say... \n\n🔥 *JOIN MY CREW!* Let’s find the One Piece together! ☠️",
+    animation=random.choice(START_GIFS),
+    caption=GREETING_CAPTION,
     parse_mode="Markdown"
 )
+
 
     # ✅ Add user if not present
     if not await present_user(id):
