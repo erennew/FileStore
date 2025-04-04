@@ -15,6 +15,8 @@ import os
 import random
 import sys
 import time
+from datetime import datetime
+import time from time 
 import string
 import string as rohit
 from pyrogram import Client, filters, __version__
@@ -39,6 +41,10 @@ TIME_WINDOW = 60  # Time window in seconds (1 minute)
 async def start_command(client: Client, message: Message):
 id = message.from_user.id
 
+ # 🕒 Time-based greeting (Night mode)
+    hour = datetime.now().hour
+    if hour >= 22 or hour < 6:
+        await message.reply("🌙 Luffy is sleepy but still here for you~")
 
     # ⛔️ Rate Limiting Block
     now = time()
@@ -55,6 +61,7 @@ id = message.from_user.id
     # ✍️ Typing action
     await client.send_chat_action(message.chat.id, "typing")
     await asyncio.sleep(1.5)
+
     # 👒 LUFFY Bot Multi-Stage Boot Sequence
     progress = await message.reply("👒 Booting LUFFY File Core...")
 
@@ -79,17 +86,26 @@ id = message.from_user.id
     await asyncio.sleep(random.uniform(0.5, 0.8))
     await progress.delete()
 
-    # ✅ Proceed with your existing logic
+    # 🎇 Send fun animated reaction
+ await message.reply_animation(
+     animation=random.choice([
+         "https://media.tenor.com/I1gfsnZzKx4AAAAC/luffy-one-piece.gif",   # Replace with fire/love/luffy GIFs you like
+        "https://media.tenor.com/zKx38HVKYpEAAAAC/monkey-d-luffy.gif"
+    ]),
+    caption="👒 *Hey you!* I've got one thing to say... \n\n🔥 *JOIN MY CREW!* Let’s find the One Piece together! ☠️",
+    parse_mode="Markdown"
+)
+
+    # ✅ Add user if not present
     if not await present_user(id):
         try:
             await add_user(id)
         except:
             pass
 
-    # 🎬 Send start animation if needed
+    # 🎬 Optional: Start GIF or info
     await send_start_animation(message)
 
-    # 🔽 Continue your remaining welcome logic below...
 
     # Check if user is an admin and treat them as verified
     if id in ADMINS:
