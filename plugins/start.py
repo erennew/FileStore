@@ -229,12 +229,12 @@ async def start_command(client: Client, message: Message):
 
             for snt_msg in codeflix_msgs:    
                 if snt_msg:
-         try:    
+                    try:    
                         await snt_msg.delete()  
                     except Exception as e:
                         print(f"Error deleting message {snt_msg.id}: {e}")
 
-        try:
+            try:
                 reload_url = (
                     f"https://t.me/{client.username}?start={message.command[1]}"
                     if message.command and len(message.command) > 1
@@ -248,7 +248,7 @@ async def start_command(client: Client, message: Message):
                     "<b>ʏᴏᴜʀ ᴠɪᴅᴇᴏ / ꜰɪʟᴇ ɪꜱ ꜱᴜᴄᴄᴇꜱꜱꜰᴜʟʟʏ ᴅᴇʟᴇᴛᴇᴅ !!\n\nᴄʟɪᴄᴋ ʙᴇʟᴏᴡ ʙᴜᴛᴛᴏɴ ᴛᴏ ɢᴇᴛ ʏᴏᴜʀ ᴅᴇʟᴇᴛᴇᴅ ᴠɪᴅᴇᴏ / ꜰɪʟᴇ 👇</b>",
                     reply_markup=keyboard
                 )
-                  except Exception as e:
+            except Exception as e:
                 print(f"Error updating notification with 'Get File Again' button: {e}")
     else:
         reply_markup = InlineKeyboardMarkup(
@@ -275,7 +275,6 @@ async def start_command(client: Client, message: Message):
             #message_effect_id=5104841245755180586  # 
         )
         return
-
 
 
 #=====================================================================================##
