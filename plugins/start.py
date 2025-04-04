@@ -9,28 +9,24 @@
 #
 # All rights reserved.
 #
-
 import asyncio
 import os
 import random
 import sys
 import time
 from datetime import datetime
-import time from time 
 import string
-import string as rohit
+
 from pyrogram import Client, filters, __version__
 from pyrogram.enums import ParseMode
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
-from pyrogram.errors.exceptions.bad_request_400 import UserNotParticipant
 from pyrogram.errors import FloodWait, UserIsBlocked, InputUserDeactivated, UserNotParticipant
+
 from bot import Bot
-from helper_func import send_start_animation  # make sure this is imported
-from helper_func import send_end_animation
-from config import *
-from helper_func import *
-from database.database import *
-from config import MAX_REQUESTS, TIME_WINDOW, START_GIFS, GREETING_CAPTION
+from database.database import *  # Only if needed, or import specific functions
+from config import MAX_REQUESTS, TIME_WINDOW, START_GIFS, GREETING_CAPTION, CHANNEL_IDS, OWNER_ID
+from helper_func import send_start_animation, send_end_animation, rate_limit
+
 
 # File auto-delete time in seconds (Set your desired time in seconds here)
 FILE_AUTO_DELETE = TIME  # Example: 3600 seconds (1 hour)
