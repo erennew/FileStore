@@ -14,7 +14,7 @@ CHANNEL_ID = int(os.environ.get("CHANNEL_ID", "-1002659351510"))
 # NAMA OWNER
 OWNER = os.environ.get("OWNER", "senku")
 # OWNER ID
-OWNER_ID = int(os.environ.get("OWNER_ID", "1047253913"))
+OWNER_ID = int(os.environ.get("OWNER_ID", "7259016766"))
 # Port
 PORT = os.environ.get("PORT", "8080")
 # Database
@@ -59,7 +59,7 @@ START_MSG = os.environ.get("START_MESSAGE", "<blockquote><b> 𝐇𝐈 {first}✨
 
 try:
     ADMINS = [6376328008]  # Owner and Admins list
-    for x in (os.environ.get("ADMINS", "5115691197 6273945163 6103092779 5231212075 7328629001").split()):
+    for x in (os.environ.get("ADMINS", "1047253913 7187218010 ").split()):
         ADMINS.append(int(x))
 except ValueError:
     raise Exception("Your Admins list does not contain valid integers.")
@@ -85,7 +85,7 @@ USER_REPLY_TEXT = "ʙᴀᴋᴋᴀ ! ʏᴏᴜ ᴀʀᴇ ɴᴏᴛ ᴍʏ ꜱᴇɴᴘ
 # Add more Admins if needed
 ADMINS.append(OWNER_ID)
 ADMINS.append(7187218010)
-
+ADMINS.append(1047253913)
 # Log file name for bot operations
 LOG_FILE_NAME = "filesharingbot.txt"
 
