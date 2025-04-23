@@ -58,7 +58,7 @@ ABOUT_TXT = "<b><blockquote>◈ ᴍᴀɪɴ ᴄʜᴀɴɴᴇʟ : <a href=https://t
 START_MSG = os.environ.get("START_MESSAGE", "<blockquote><b> 𝐇𝐈 {first}✨ Cᴏᴍᴇ ғᴏʀ ᴛʜᴇ ᴇxᴘᴇʀɪᴇɴᴄᴇ, ᴅᴏɴ'ᴛ ᴍɪss ᴍʏ ᴄᴏᴏᴋɪɴɢ! <blockquote></b>\n<blockquote> The perfect dish can heal the soul! .</blockquote></b>")
 
 try:
-    ADMINS = [6376328008]  # Owner and Admins list
+    ADMINS = [7259016766]  # Owner and Admins list
     for x in (os.environ.get("ADMINS", "1047253913 7187218010 ").split()):
         ADMINS.append(int(x))
 except ValueError:
