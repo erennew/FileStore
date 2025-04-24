@@ -269,10 +269,29 @@ async def not_joined(client: Client, message: Message):
     #message_effect_id=5104841245755180586  # Add the effect ID here
 )
 
+WAIT_MSGS = [
+    "<b>🔥 Cooking up your request, love~ Just a moment... 🕺🍽️</b>",
+    "<b>👨‍🍳 Chef Sanji’s on it! Your file is being prepared with love... ❤️‍🔥</b>",
+    "<b>💨 Preheating the kitchen! Sanji-style speed incoming... 🍷💋</b>",
+    "<b>🍜 Stirring the spices... Your file is almost ready, sweetheart~ 😘</b>",
+    "<b>🍷 Let’s make it perfect — just like a romantic dinner! Wait a sec~</b>",
+    "<b>💋 Anything for a beautiful user like you~ Preparing your file now 😌</b>",
+    "<b>🔥 Just like my cooking — I’m serving your request hot and fresh!</b>",
+    "<b>🧑‍🍳 The prince of the kitchen is on it... stay gorgeous while you wait~ 💛</b>",
+    "<b>🍖 Grilling your file with love and flavor... Almost done, mon chéri~</b>",
+    "<b>💃 A dish for a queen! File incoming, just a sec my lady~ 💐</b>",
+    "<b>🍽️ Gourmet mode: ON — prepping your file with elegance and spice~</b>",
+    "<b>❤️‍🔥 File loading... like my passion in the kitchen~</b>",
+    "<b>👠 Serving beauty and bytes — your file’s on the way, angel~</b>",
+    "<b>🕶️ Cool, classy, and delicious — your file is almost plated!</b>",
+    "<b>💎 Sanji never rushes perfection. File’s nearly ready, darling~</b>"
+]
 
 #=====================================================================================##
 
-WAIT_MSG = "<b>Working....</b>"
+import random
+WAIT_MSG = random.choice(WAIT_MSGS)
+
 
 REPLY_ERROR = "<code>Use this command as a reply to any telegram message without any spaces.</code>"
 
