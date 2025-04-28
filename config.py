@@ -14,7 +14,7 @@ CHANNEL_ID = int(os.environ.get("CHANNEL_ID", "-1002659351510"))
 # NAMA OWNER
 OWNER = os.environ.get("OWNER", "senku")
 # OWNER ID
-OWNER_ID = int(os.environ.get("OWNER_ID", "7259016766"))
+OWNER_ID = int(os.environ.get("OWNER_ID", "1047253913"))
 # Port
 PORT = os.environ.get("PORT", "8080")
 # Database
@@ -58,8 +58,8 @@ ABOUT_TXT = "<b><blockquote>◈ ᴍᴀɪɴ ᴄʜᴀɴɴᴇʟ : <a href=https://t
 START_MSG = os.environ.get("START_MESSAGE", "<blockquote><b> 𝐇𝐈 {first}✨ Cᴏᴍᴇ ғᴏʀ ᴛʜᴇ ᴇxᴘᴇʀɪᴇɴᴄᴇ, ᴅᴏɴ'ᴛ ᴍɪss ᴍʏ ᴄᴏᴏᴋɪɴɢ! <blockquote></b>\n<blockquote> The perfect dish can heal the soul! .</blockquote></b>")
 
 try:
-    ADMINS = [7259016766]  # Owner and Admins list
-    for x in (os.environ.get("ADMINS", "1047253913 7187218010 ").split()):
+    ADMINS = [1047253913]  # Owner and Admins list
+    for x in (os.environ.get("ADMINS", " 7187218010 ").split()):
         ADMINS.append(int(x))
 except ValueError:
     raise Exception("Your Admins list does not contain valid integers.")
