@@ -11,3 +11,29 @@ async def stats(bot: Bot, message: Message):
     delta = now - bot.uptime
     time = get_readable_time(delta.seconds)
     await message.reply(BOT_STATS_TEXT.format(uptime=time))
+
+@Bot.on_message(filters.command('users') & filters.private & admin)
+async def get_users(client: Bot, message: Message):
+    msg = await client.send_message(chat_id=message.chat.id, text=WAIT_MSG)
+    users = await db.full_userbase()
+    await msg.edit(f"{len(users)} users are using this bot")
+
+
+@Bot.on_message(filters.private & filters.command('dlt_time') & admin)
+async def set_delete_time(client: Bot, message: Message):
+    try:
+        duration = int(message.command[1])
+
+        await db.set_del_timer(duration)
+
+        await message.reply(f"<b>Dᴇʟᴇᴛᴇ Tɪᴍᴇʀ ʜᴀs ʙᴇᴇɴ sᴇᴛ ᴛᴏ <blockquote>{duration} sᴇᴄᴏɴᴅs.</blockquote></b>")
+
+    except (IndexError, ValueError):
+        await message.reply("<b>Pʟᴇᴀsᴇ ᴘʀᴏᴠɪᴅᴇ ᴀ ᴠᴀʟɪᴅ ᴅᴜʀᴀᴛɪᴏɴ ɪɴ sᴇᴄᴏɴᴅs.</b> Usage: /dlt_time {duration}")
+
+@Bot.on_message(filters.private & filters.command('check_dlt_time') & admin)
+async def check_delete_time(client: Bot, message: Message):
+    duration = await db.get_del_timer()
+
+    await message.reply(f"<b><blockquote>Cᴜʀʀᴇɴᴛ ᴅᴇʟᴇᴛᴇ ᴛɪᴍᴇʀ ɪs sᴇᴛ ᴛᴏ {duration}sᴇᴄᴏɴᴅs.</blockquote></b>")
+
