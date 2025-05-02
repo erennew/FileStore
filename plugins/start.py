@@ -28,18 +28,23 @@ from helper_func import *
 from database.database import *
 
 # File auto-delete time in seconds (Set your desired time in seconds here)
-FILE_AUTO_DELETE = TIME  # Example: 3600 seconds (1 hour)
+#FILE_AUTO_DELETE = TIME  # Example: 3600 seconds (1 hour)
 TUT_VID = f"{TUT_VID}"
-
-@Bot.on_message(filters.command('start') & filters.private & subscribed1 & subscribed2 & subscribed3 & subscribed4)
+BAN_SUPPORT = f"{BAN_SUPPORT}"
+@Bot.on_message(filters.command('start') & filters.private)
 async def start_command(client: Client, message: Message):
-    id = message.from_user.id
-    if not await present_user(id):
-        try:
-            await add_user(id)
-        except:
-            pass
+    user_id = message.from_user.id
 
+    # Check if user is banned
+    banned_users = await db.get_ban_users()
+    if user_id in banned_users:
+        return await message.reply_text(
+            "<b>⛔️ You are Bᴀɴɴᴇᴅ from using this bot.</b>\n\n"
+            "<i>Contact support if you think this is a mistake.</i>",
+            reply_markup=InlineKeyboardMarkup(
+                [[InlineKeyboardButton("Contact Support", url=BAN_SUPPORT)]]
+            )
+        )
     # Check if user is an admin and treat them as verified
     if id in ADMINS:
         verify_status = {
@@ -86,6 +91,22 @@ async def start_command(client: Client, message: Message):
                 )
 
     # Handle normal message flow
+    # ✅ Check Force Subscription
+    if not await is_subscribed(client, user_id):
+        #await temp.delete()
+        return await not_joined(client, message)
+
+    # File auto-delete time in seconds (Set your desired time in seconds here)
+    FILE_AUTO_DELETE = await db.get_del_timer()  # Example: 3600 seconds (1 hour)
+
+    # Add user if not already present
+    if not await db.present_user(user_id):
+        try:
+            await db.add_user(user_id)
+        except:
+            pass
+
+    # Handle normal message flow
     text = message.text
     if len(text) > 7:
         try:
@@ -113,7 +134,7 @@ async def start_command(client: Client, message: Message):
                 print(f"Error decoding ID: {e}")
                 return
 
-        temp_msg = await message.reply("Please wait...")
+        temp_msg = await message.reply("<b>Please wait...</b>")
         try:
             messages = await get_messages(client, ids)
         except Exception as e:
@@ -146,7 +167,7 @@ async def start_command(client: Client, message: Message):
 
         if FILE_AUTO_DELETE > 0:
             notification_msg = await message.reply(
-                f"<b>This file will be deleted in {get_exp_time(FILE_AUTO_DELETE)}(Due To Copyright Issues). 📌Please save or forward it to your saved messages before it gets deleted.</b>"
+                f"<b>Tʜɪs Fɪʟᴇ ᴡɪʟʟ ʙᴇ Dᴇʟᴇᴛᴇᴅ ɪɴ  {get_exp_time(FILE_AUTO_DELETE)}. Pʟᴇᴀsᴇ sᴀᴠᴇ ᴏʀ ғᴏʀᴡᴀʀᴅ ɪᴛ ᴛᴏ ʏᴏᴜʀ sᴀᴠᴇᴅ ᴍᴇssᴀɢᴇs ʙᴇғᴏʀᴇ ɪᴛ ɢᴇᴛs Dᴇʟᴇᴛᴇᴅ.</b>"
             )
 
             await asyncio.sleep(FILE_AUTO_DELETE)
@@ -177,7 +198,7 @@ async def start_command(client: Client, message: Message):
     else:
         reply_markup = InlineKeyboardMarkup(
             [
-                    [InlineKeyboardButton("• ᴍᴀɪɴ ᴄʜᴀɴɴᴇʟ •", url="https://t.me/CulturedTeluguweeb")],
+                    [InlineKeyboardButton("• ᴍᴏʀᴇ ᴄʜᴀɴɴᴇʟs •", url="https://t.me/Nova_Flix/50")],
 
     [
                     InlineKeyboardButton("• ᴀʙᴏᴜᴛ", callback_data = "about"),
@@ -195,9 +216,9 @@ async def start_command(client: Client, message: Message):
                 mention=message.from_user.mention,
                 id=message.from_user.id
             ),
-            reply_markup=reply_markup#,
-            #message_effect_id=5104841245755180586  # 
-        )
+            reply_markup=reply_markup,
+            message_effect_id=5104841245755180586)  # 🔥
+        
         return
 
 
@@ -206,100 +227,98 @@ async def start_command(client: Client, message: Message):
 # Don't Remove Credit @CodeFlix_Bots, @rohit_1888
 # Ask Doubt on telegram @CodeflixSupport
 
-@Bot.on_message(filters.command('start') & filters.private)
+
+
+# Create a global dictionary to store chat data
+chat_data_cache = {}
+
 async def not_joined(client: Client, message: Message):
-    # Initialize buttons list
+    temp = await message.reply("<b><i>ᴡᴀɪᴛ ᴀ sᴇᴄ..</i></b>")
+
+    user_id = message.from_user.id
     buttons = []
+    count = 0
 
-    # Check if the first and second channels are both set
-    if FORCE_SUB_CHANNEL1 and FORCE_SUB_CHANNEL2:
-        buttons.append([
-            InlineKeyboardButton(text=" ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ 1✨", url=client.invitelink1),
-            InlineKeyboardButton(text=" ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ 2⚡", url=client.invitelink2),
-        ])
-    # Check if only the first channel is set
-    elif FORCE_SUB_CHANNEL1:
-        buttons.append([
-            InlineKeyboardButton(text=" ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ 1✨", url=client.invitelink1)
-        ])
-    # Check if only the second channel is set
-    elif FORCE_SUB_CHANNEL2:
-        buttons.append([
-            InlineKeyboardButton(text=" ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ 2⚡", url=client.invitelink2)
-        ])
-
-    # Check if the third and fourth channels are set
-    if FORCE_SUB_CHANNEL3 and FORCE_SUB_CHANNEL4:
-        buttons.append([
-            InlineKeyboardButton(text=" ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ 3🌹", url=client.invitelink3),
-            InlineKeyboardButton(text=" ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ 4🔥", url=client.invitelink4),
-        ])
-    # Check if only the first channel is set
-    elif FORCE_SUB_CHANNEL3:
-        buttons.append([
-            InlineKeyboardButton(text=" ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ 3🌹", url=client.invitelink3)
-        ])
-    # Check if only the second channel is set
-    elif FORCE_SUB_CHANNEL4:
-        buttons.append([
-            InlineKeyboardButton(text=" ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ 4🔥", url=client.invitelink4)
-        ])
-
-    # Append "Try Again" button if the command has a second argument
     try:
-        buttons.append([
-            InlineKeyboardButton(
-                text="♻️ Tʀʏ Aɢᴀɪɴ",
-                url=f"https://t.me/{client.username}?start={message.command[1]}"
-            )
-        ])
-    except IndexError:
-        pass  # Ignore if no second argument is present
+        all_channels = await db.show_channels()  # Should return list of (chat_id, mode) tuples
+        for total, chat_id in enumerate(all_channels, start=1):
+            mode = await db.get_channel_mode(chat_id)  # fetch mode 
 
-    await message.reply_photo(
-        photo=FORCE_PIC,
-        caption=FORCE_MSG.format(
-        first=message.from_user.first_name,
-        last=message.from_user.last_name,
-        username=None if not message.from_user.username else '@' + message.from_user.username,
-        mention=message.from_user.mention,
-        id=message.from_user.id
-    ),
-    reply_markup=InlineKeyboardMarkup(buttons)#,
-    #message_effect_id=5104841245755180586  # Add the effect ID here
-)
+            await message.reply_chat_action(ChatAction.TYPING)
 
-WAIT_MSGS = [
-    "<b>🔥 Cooking up your request, love~ Just a moment... 🕺🍽️</b>",
-    "<b>👨‍🍳 Chef Sanji’s on it! Your file is being prepared with love... ❤️‍🔥</b>",
-    "<b>💨 Preheating the kitchen! Sanji-style speed incoming... 🍷💋</b>",
-    "<b>🍜 Stirring the spices... Your file is almost ready, sweetheart~ 😘</b>",
-    "<b>🍷 Let’s make it perfect — just like a romantic dinner! Wait a sec~</b>",
-    "<b>💋 Anything for a beautiful user like you~ Preparing your file now 😌</b>",
-    "<b>🔥 Just like my cooking — I’m serving your request hot and fresh!</b>",
-    "<b>🧑‍🍳 The prince of the kitchen is on it... stay gorgeous while you wait~ 💛</b>",
-    "<b>🍖 Grilling your file with love and flavor... Almost done, mon chéri~</b>",
-    "<b>💃 A dish for a queen! File incoming, just a sec my lady~ 💐</b>",
-    "<b>🍽️ Gourmet mode: ON — prepping your file with elegance and spice~</b>",
-    "<b>❤️‍🔥 File loading... like my passion in the kitchen~</b>",
-    "<b>👠 Serving beauty and bytes — your file’s on the way, angel~</b>",
-    "<b>🕶️ Cool, classy, and delicious — your file is almost plated!</b>",
-    "<b>💎 Sanji never rushes perfection. File’s nearly ready, darling~</b>"
-]
+            if not await is_sub(client, user_id, chat_id):
+                try:
+                    # Cache chat info
+                    if chat_id in chat_data_cache:
+                        data = chat_data_cache[chat_id]
+                    else:
+                        data = await client.get_chat(chat_id)
+                        chat_data_cache[chat_id] = data
+
+                    name = data.title
+
+                    # Generate proper invite link based on the mode
+                    if mode == "on" and not data.username:
+                        invite = await client.create_chat_invite_link(
+                            chat_id=chat_id,
+                            creates_join_request=True,
+                            expire_date=datetime.utcnow() + timedelta(seconds=FSUB_LINK_EXPIRY) if FSUB_LINK_EXPIRY else None
+                            )
+                        link = invite.invite_link
+
+                    else:
+                        if data.username:
+                            link = f"https://t.me/{data.username}"
+                        else:
+                            invite = await client.create_chat_invite_link(
+                                chat_id=chat_id,
+                                expire_date=datetime.utcnow() + timedelta(seconds=FSUB_LINK_EXPIRY) if FSUB_LINK_EXPIRY else None)
+                            link = invite.invite_link
+
+                    buttons.append([InlineKeyboardButton(text=name, url=link)])
+                    count += 1
+                    await temp.edit(f"<b>{'! ' * count}</b>")
+
+                except Exception as e:
+                    print(f"Error with chat {chat_id}: {e}")
+                    return await temp.edit(
+                        f"<b><i>! Eʀʀᴏʀ, Cᴏɴᴛᴀᴄᴛ ᴅᴇᴠᴇʟᴏᴘᴇʀ ᴛᴏ sᴏʟᴠᴇ ᴛʜᴇ ɪssᴜᴇs @rohit_1888</i></b>\n"
+                        f"<blockquote expandable><b>Rᴇᴀsᴏɴ:</b> {e}</blockquote>"
+                    )
+
+        # Retry Button
+        try:
+            buttons.append([
+                InlineKeyboardButton(
+                    text='♻️ Tʀʏ Aɢᴀɪɴ',
+                    url=f"https://t.me/{client.username}?start={message.command[1]}"
+                )
+            ])
+        except IndexError:
+            pass
+
+        await message.reply_photo(
+            photo=FORCE_PIC,
+            caption=FORCE_MSG.format(
+                first=message.from_user.first_name,
+                last=message.from_user.last_name,
+                username=None if not message.from_user.username else '@' + message.from_user.username,
+                mention=message.from_user.mention,
+                id=message.from_user.id
+            ),
+            reply_markup=InlineKeyboardMarkup(buttons),
+        )
+
+    except Exception as e:
+        print(f"Final Error: {e}")
+        await temp.edit(
+            f"<b><i>! Eʀʀᴏʀ, Cᴏɴᴛᴀᴄᴛ ᴅᴇᴠᴇʟᴏᴘᴇʀ ᴛᴏ sᴏʟᴠᴇ ᴛʜᴇ ɪssᴜᴇs @rohit_1888</i></b>\n"
+            f"<blockquote expandable><b>Rᴇᴀsᴏɴ:</b> {e}</blockquote>"
+        )
 
 #=====================================================================================##
-
-
-WAIT_MSG = random.choice(WAIT_MSGS)
-
-
-REPLY_ERROR = "<code>Use this command as a reply to any telegram message without any spaces.</code>"
-
-#=====================================================================================##
-
 
 @Bot.on_message(filters.command('commands') & filters.private & admin)
 async def bcmd(bot: Bot, message: Message):        
     reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton("• ᴄʟᴏsᴇ •", callback_data = "close")]])
     await message.reply(text=CMD_TXT, reply_markup = reply_markup, quote= True)
-
