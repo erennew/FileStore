@@ -15,69 +15,59 @@ from database.database import *
 
 
 
-async def is_subscribed1(filter, client, update):
-    if not FORCE_SUB_CHANNEL1:
-        return True
-    user_id = update.from_user.id
-    if user_id in ADMINS:
-        return True
+async def check_admin(filter, client, update):
     try:
-        member = await client.get_chat_member(chat_id = FORCE_SUB_CHANNEL1, user_id = user_id)
-    except UserNotParticipant:
+        user_id = update.from_user.id       
+        return any([user_id == OWNER_ID, await db.admin_exist(user_id)])
+    except Exception as e:
+        print(f"! Exception in check_admin: {e}")
         return False
 
-    if not member.status in [ChatMemberStatus.OWNER, ChatMemberStatus.ADMINISTRATOR, ChatMemberStatus.MEMBER]:
-        return False
-    else:
+async def is_subscribed(client, user_id):
+    channel_ids = await db.show_channels()
+
+    if not channel_ids:
         return True
 
-async def is_subscribed2(filter, client, update):
-    if not FORCE_SUB_CHANNEL2:
+    if user_id == OWNER_ID:
         return True
-    user_id = update.from_user.id
-    if user_id in ADMINS:
-        return True
+
+    for cid in channel_ids:
+        if not await is_sub(client, user_id, cid):
+            # Retry once if join request might be processing
+            mode = await db.get_channel_mode(cid)
+            if mode == "on":
+                await asyncio.sleep(2)  # give time for @on_chat_join_request to process
+                if await is_sub(client, user_id, cid):
+                    continue
+            return False
+
+    return True
+
+
+async def is_sub(client, user_id, channel_id):
     try:
-        member = await client.get_chat_member(chat_id = FORCE_SUB_CHANNEL2, user_id = user_id)
+        member = await client.get_chat_member(channel_id, user_id)
+        status = member.status
+        #print(f"[SUB] User {user_id} in {channel_id} with status {status}")
+        return status in {
+            ChatMemberStatus.OWNER,
+            ChatMemberStatus.ADMINISTRATOR,
+            ChatMemberStatus.MEMBER
+        }
+
     except UserNotParticipant:
+        mode = await db.get_channel_mode(channel_id)
+        if mode == "on":
+            exists = await db.req_user_exist(channel_id, user_id)
+            #print(f"[REQ] User {user_id} join request for {channel_id}: {exists}")
+            return exists
+        #print(f"[NOT SUB] User {user_id} not in {channel_id} and mode != on")
         return False
 
-    if not member.status in [ChatMemberStatus.OWNER, ChatMemberStatus.ADMINISTRATOR, ChatMemberStatus.MEMBER]:
+    except Exception as e:
+        print(f"[!] Error in is_sub(): {e}")
         return False
-    else:
-        return True
-
-async def is_subscribed3(filter, client, update):
-    if not FORCE_SUB_CHANNEL3:
-        return True
-    user_id = update.from_user.id
-    if user_id in ADMINS:
-        return True
-    try:
-        member = await client.get_chat_member(chat_id = FORCE_SUB_CHANNEL3, user_id = user_id)
-    except UserNotParticipant:
-        return False
-
-    if not member.status in [ChatMemberStatus.OWNER, ChatMemberStatus.ADMINISTRATOR, ChatMemberStatus.MEMBER]:
-        return False
-    else:
-        return True
-
-async def is_subscribed4(filter, client, update):
-    if not FORCE_SUB_CHANNEL4:
-        return True
-    user_id = update.from_user.id
-    if user_id in ADMINS:
-        return True
-    try:
-        member = await client.get_chat_member(chat_id = FORCE_SUB_CHANNEL4, user_id = user_id)
-    except UserNotParticipant:
-        return False
-
-    if not member.status in [ChatMemberStatus.OWNER, ChatMemberStatus.ADMINISTRATOR, ChatMemberStatus.MEMBER]:
-        return False
-    else:
-        return True
 
 
 async def encode(string):
@@ -124,7 +114,7 @@ async def get_message_id(client, message):
     elif message.forward_sender_name:
         return 0
     elif message.text:
-        pattern = r"https://t.me/(?:c/)?(.*)/(\d+)"  
+        pattern = "https://t.me/(?:c/)?(.*)/(\d+)"
         matches = re.match(pattern,message.text)
         if not matches:
             return 0
@@ -161,6 +151,7 @@ def get_readable_time(seconds: int) -> str:
     up_time += ":".join(time_list)
     return up_time
 
+
 async def get_verify_status(user_id):
     verify = await db_verify_status(user_id)
     return verify
@@ -179,6 +170,7 @@ async def get_shortlink(url, api, link):
     link = await shortzy.convert(link)
     return link
 
+
 def get_exp_time(seconds):
     periods = [('days', 86400), ('hours', 3600), ('mins', 60), ('secs', 1)]
     result = ''
@@ -188,10 +180,7 @@ def get_exp_time(seconds):
             result += f'{int(period_value)} {period_name}'
     return result
 
-
-subscribed1 = filters.create(is_subscribed1)
-subscribed2 = filters.create(is_subscribed2)
-subscribed3 = filters.create(is_subscribed3)
-subscribed4 = filters.create(is_subscribed4)
+subscribed = filters.create(is_subscribed)
+admin = filters.create(check_admin)
 
 #rohit_1888 on Tg :
