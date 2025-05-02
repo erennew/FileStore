@@ -249,7 +249,7 @@ async def not_joined(client: Client, message: Message):
     try:
         buttons.append([
             InlineKeyboardButton(
-                text="ʀᴇʟᴏᴀᴅ🔄️",
+                text="♻️ Tʀʏ Aɢᴀɪɴ",
                 url=f"https://t.me/{client.username}?start={message.command[1]}"
             )
         ])
@@ -298,9 +298,8 @@ REPLY_ERROR = "<code>Use this command as a reply to any telegram message without
 #=====================================================================================##
 
 
-@Bot.on_message(filters.command('users') & filters.private & filters.user(ADMINS))
-async def get_users(client: Bot, message: Message):
-    msg = await client.send_message(chat_id=message.chat.id, text=WAIT_MSG)
-    users = await full_userbase()
-    await msg.edit(f"{len(users)} users are using this bot")
+@Bot.on_message(filters.command('commands') & filters.private & admin)
+async def bcmd(bot: Bot, message: Message):        
+    reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton("• ᴄʟᴏsᴇ •", callback_data = "close")]])
+    await message.reply(text=CMD_TXT, reply_markup = reply_markup, quote= True)
 
