@@ -11,6 +11,13 @@ async def stats(bot: Bot, message: Message):
     delta = now - bot.uptime
     time = get_readable_time(delta.seconds)
     await message.reply(BOT_STATS_TEXT.format(uptime=time))
+    
+#=====================================================================================##
+
+WAIT_MSG = "<b>Working....</b>"
+
+#=====================================================================================##
+
 
 @Bot.on_message(filters.command('users') & filters.private & admin)
 async def get_users(client: Bot, message: Message):
