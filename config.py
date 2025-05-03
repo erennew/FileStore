@@ -38,16 +38,9 @@ START_PIC = os.environ.get("START_PIC", "https://i.ibb.co/F4ytZfyG/x.jpg")
 # Force Subscription Image URL
 FORCE_PIC = os.environ.get("FORCE_PIC", "https://i.ibb.co/FqK4HFX4/x.jpg")
 
-# Enable Token for specific purposes
-TOKEN = False if os.environ.get('TOKEN', "True") == "True" else False
-SHORTLINK_URL = os.environ.get("SHORTLINK_URL", "https://example.com")  # Change to a placeholder or irrelevant URL
-SHORTLINK_API = os.environ.get("SHORTLINK_API", "dummy_api_key")  # Replace with a dummy key or keep it disabled
-VERIFY_EXPIRE = int(os.environ.get('VERIFY_EXPIRE', 0))  # Set to 0 to disable expiration
-IS_VERIFY = os.environ.get("IS_VERIFY", "False")  # Set to "False" to turn off verification
-TUT_VID = os.environ.get("TUT_VID", "")  # Empty or change to a different irrelevant URL
 
 FSUB_LINK_EXPIRY = int(os.getenv("FSUB_LINK_EXPIRY", "10"))  # 0 means no expiry
-BAN_SUPPORT = os.environ.get("BAN_SUPPORT", "https://t.me/CodeflixSupport")
+BAN_SUPPORT = os.environ.get("BAN_SUPPORT", "https://t.me/+IIgB6RgivTI2NzA1")
 # Help text for the bot
 
 HELP_TXT = "<b><blockquote>ᴛʜɪs ɪs ᴀɴ ғɪʟᴇ ᴛᴏ ʟɪɴᴋ ʙᴏᴛ ᴡᴏʀᴋ ғᴏʀ @Culturedteluguweeb\n\n❏ ʙᴏᴛ ᴄᴏᴍᴍᴀɴᴅs\n├/start : sᴛᴀʀᴛ ᴛʜᴇ ʙᴏᴛ\n├/about : ᴏᴜʀ Iɴғᴏʀᴍᴀᴛɪᴏɴ\n└/help : ʜᴇʟᴘ ʀᴇʟᴀᴛᴇᴅ ʙᴏᴛ\n\n sɪᴍᴘʟʏ ᴄʟɪᴄᴋ ᴏɴ ʟɪɴᴋ ᴀɴᴅ sᴛᴀʀᴛ ᴛʜᴇ ʙᴏᴛ ᴊᴏɪɴ ʙᴏᴛʜ ᴄʜᴀɴɴᴇʟs ᴀɴᴅ ᴛʀʏ ᴀɢᴀɪɴ ᴛʜᴀᴛs ɪᴛ.....!</blockquote></b>"
@@ -84,7 +77,7 @@ BOT_STATS_TEXT = "<b>BOT UPTIME</b>\n{uptime}"
 USER_REPLY_TEXT = "ʙᴀᴋᴋᴀ ! ʏᴏᴜ ᴀʀᴇ ɴᴏᴛ ᴍʏ ꜱᴇɴᴘᴀɪ!!"
 
 # Add more Admins if needed
-ADMINS.append(OWNER_ID)
+ADMINS.append(1047253913)
 ADMINS.append(7187218010)
 ADMINS.append(1047253913)
 
