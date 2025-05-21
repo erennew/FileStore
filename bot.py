@@ -54,11 +54,11 @@ class Bot(Client):
         # Start Web Server
         app = web.AppRunner(await web_server())
         await app.setup()
-        await web.TCPSite(app, "8.0.8.0", PORT).start()
-
-
-        try: await self.send_message(OWNER_ID, text = f"<b><blockquote> Bᴏᴛ Rᴇsᴛᴀʀᴛᴇᴅ by @Culturedteluguweeb</blockquote></b>")
+        bind_address = "0.0.0.0"
+        await web.TCPSite(app, bind_address, PORT).start()
+        try: await self.send_message(OWNER_ID, text = f"<b><blockquote>🤖 Bᴏᴛ Rᴇsᴛᴀʀᴛᴇᴅ </blockquote></b>")
         except: pass
+
 
     async def stop(self, *args):
         await super().stop()
